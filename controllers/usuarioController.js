@@ -13,7 +13,7 @@ const registrar = async (req, res) => {
 
   try {
     const usuario = new Usuario(req.body);
-    usuario.token = generarId();
+    usuario.token = '';
     await usuario.save();
     res.json({
       msg: "Usuario creado correctamente...",
