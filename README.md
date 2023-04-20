@@ -1,4 +1,4 @@
-# El Tiempo (Front Back - RESTful API)
+# El Tiempo (Back End - RESTful API)
 Proyecto de Prueba Tecnica para El Tiempo
 
 ## Summary
