@@ -4,9 +4,8 @@ import cors from "cors";
 import conectarDB from "./config/db.js";
 import usuarioRoutes from "./routes/usuarioRoutes.js";
 import productoRoutes from "./routes/productoRoutes.js";
-
-const app = express();
-app.use(express.json());
+import createError from "http-errors";
+import errorHandler from "./middleware/checkError.js"
 
 dotenv.config();
 
@@ -24,11 +23,28 @@ const corsOptions = {
   },
 };
 
-app.use(cors(corsOptions));
-app.use("/api/usuarios", usuarioRoutes);
-app.use("/api/productos", productoRoutes);
+const configuracionApi = (app) => {
+  app.use(express.json())
+  app.use(cors(corsOptions));
+};
 
-const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en el puerto ${PORT}`);
-});
+const configuracionRouter = (app) => {
+  app.use("/api/usuarios", usuarioRoutes);
+  app.use("/api/productos", productoRoutes);
+  app.use(function (req, res, next) {
+    next(createError(404));
+  });
+  app.use(errorHandler);
+};
+
+const init = () => {
+  const app = express()
+  configuracionApi(app)
+  configuracionRouter(app)
+  const PORT = process.env.PORT || 4000;
+  app.listen(PORT, () => {
+    console.log(`Servidor corriendo en el puerto ${PORT}`);
+  });
+};
+
+init();
