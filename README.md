@@ -1,4 +1,4 @@
-# El Tiempo (Back End - RESTful API)
+# Back End - RESTful API (El Tiempo)
 Proyecto de Prueba Técnica para el periodico El Tiempo de Colombia
 
 ## Summary
@@ -12,7 +12,7 @@ Creación de RESTful API utilizando NodeJS, Express
 - Prueba Unitarias
 - Mucho Más
 
-# ENV.Example
+## Ejemplo variables ENV
 - MONGO_URI=
 - JWT_SECRET=
 - FRONTEND_URL=
