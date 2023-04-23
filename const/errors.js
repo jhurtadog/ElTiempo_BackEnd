@@ -31,4 +31,8 @@ export default {
         code: 400,
         message: 'Token no válido'
     },
+    'objEmpty': {
+        code: 400,
+        message: 'Parametros no válido'
+    }
 }

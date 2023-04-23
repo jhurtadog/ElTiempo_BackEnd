@@ -3,7 +3,7 @@ import generarId from "../helpers/generarId.js";
 import generarJWT from "../helpers/generarJWT.js";
 import errors from  "../const/errors.js"
 
-const registrar = async (req, res) => {
+const registrar = async (req, res, next) => {
   const { email } = req.body;
   const existeUsuario = await Usuario.findOne({ email });
   if(!existeUsuario) return next(errors.usuarioRegistrar)
@@ -38,7 +38,7 @@ const autenticar = async (req, res, next) => {
   }
 };
 
-const perfil = async (req, res) => {
+const perfil = async (req, res, next) => {
   const { usuario } = req;
   res.json(usuario);
 };

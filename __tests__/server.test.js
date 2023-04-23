@@ -14,12 +14,11 @@ afterEach(async () => {
 });
 
 describe("Probar la ruta Usuarios", () => {
-    it("Debería responder al método POST 404", () => {
-        return request(app)
-            .post("/api/usuarios/login")
-            .expect(404);
+    it("Debería responder al método POST 400", async () => {
+        const res = await request(app).post("/api/usuarios/login")
+        expect(res.statusCode).to.be(400);
     });
-    it("Debería responder al método POST 200", async () => {
+    it("Debería responder al método POST 200 y devolver json", async () => {
         const res = await request(app).post("/api/usuarios/login").send({
             email: "jose@hurtado.com",
             password: '123456',
