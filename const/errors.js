@@ -12,7 +12,7 @@ export default {
         message: 'El usuario no existe'
     },
     'emailString': {
-        code: 400,
+        code: 404,
         message: 'El correo electrónico debe ser una cadena'
     },
     'emailFormato': {

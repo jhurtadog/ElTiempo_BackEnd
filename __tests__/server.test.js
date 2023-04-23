@@ -1,25 +1,31 @@
 import request from 'supertest';
-import express from 'express';
+import expect from 'expect.js';
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+import app from "../app.js"
+dotenv.config();
 
-const app = express();
-
-app.post('/api/usuarios/login', function (req, res) {
-    res.set('Content-Type', 'application/json');
-    res.json({
-        email: "jose@hurtado.com",
-        password: "123456"
-    });
+beforeEach(async () => {
+    await mongoose.connect(process.env.MONGO_URI);
 });
 
-describe('POST /usuarios/login', function () {
-    it('responde con 200', function () {
+afterEach(async () => {
+    await mongoose.connection.close();
+});
+
+describe("Probar la ruta Usuarios", () => {
+    it("Debería responder al método POST 404", () => {
         return request(app)
-            .post('/api/usuarios/login')
-            .set('Accept', 'application/json')
-            .expect(200)
-            .expect(function(res) {
-                res.body.email = 'jose@hurtado.com';
-                res.body.password = '123456';
-              })
+            .post("/api/usuarios/login")
+            .expect(404);
+    });
+    it("Debería responder al método POST 200", async () => {
+        const res = await request(app).post("/api/usuarios/login").send({
+            email: "jose@hurtado.com",
+            password: '123456',
+        });
+        expect(res.type).to.be('application/json');
+        expect(res.statusCode).to.be(200);
+        expect(res.body.email).to.be('jose@hurtado.com')
     });
 });

@@ -8,15 +8,15 @@ const autenticarValidation = async (req, res, next) => {
         if (typeof email !== 'string') {
             return next(errors.emailString);
         }
-        if (!regEmail.test(email)) {
-            return next(errors.emailFormato);
-        }
         if (password.length < 6) {
             return next(errors.passwordLength);
         }
+        /*if (!regEmail.test(email)) {
+            return next(errors.emailFormato);
+        }
         if (!regCharacters.test(password)) {
             return next(errors.passwordString);
-        }
+        }*/
     } catch (error) {
         console.log('error', error)
     }
