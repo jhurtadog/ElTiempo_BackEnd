@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "Prueba Tecnica El Tiempo",
   "type": "module",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "dev": "nodemon index.js",
-    "start": "node index.js",
+    "dev": "nodemon server.js",
+    "start": "node server.js",
     "test": "mocha **/*.test.js"
   },
   "keywords": [
@@ -25,6 +25,9 @@
     "mongoose": "^6.2.1"
   },
   "devDependencies": {
+    "expect.js": "^0.3.1",
+    "jest": "^29.5.0",
+    "mocha": "^10.2.0",
     "nodemon": "^2.0.15",
     "supertest": "^6.3.3"
   }
