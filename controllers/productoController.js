@@ -1,13 +1,13 @@
 import Producto from "../models/Producto.js";
 
-const obtenerProductos = async (req, res) => {
+const obtenerProductos = async (req, res, next) => {
     const productos = await Producto.find()
         .where("creador")
         .equals(req.usuario._id);
     res.status(200).json(productos);
 };
 
-const nuevoProducto = async (req, res) => {
+const nuevoProducto = async (req, res, next) => {
     const producto = new Producto(req.body);
     producto.creador = req.usuario._id;
 
@@ -15,11 +15,11 @@ const nuevoProducto = async (req, res) => {
         const productoAlmacenado = await producto.save();
         res.json(productoAlmacenado);
     } catch (error) {
-        console.log(error);
+        return next({ code: 400, message: error.message });
     }
 };
 
-const obtenerProducto = async (req, res) => {
+const obtenerProducto = async (req, res, next) => {
     const { id } = req.params;
 
     const producto = await Producto.findById(id)
@@ -39,7 +39,7 @@ const obtenerProducto = async (req, res) => {
     res.json(producto);
 };
 
-const editarProducto = async (req, res) => {
+const editarProducto = async (req, res, next) => {
     const { id } = req.params;
 
     const producto = await Producto.findById(id);
@@ -63,11 +63,11 @@ const editarProducto = async (req, res) => {
         const productoAlmacenado = await producto.save();
         res.json(productoAlmacenado);
     } catch (error) {
-        console.log(error);
+        return next({ code: 400, message: error.message });
     }
 };
 
-const eliminarProducto = async (req, res) => {
+const eliminarProducto = async (req, res, next) => {
     const { id } = req.params;
 
     const producto = await Producto.findById(id);
@@ -86,7 +86,7 @@ const eliminarProducto = async (req, res) => {
         await producto.deleteOne();
         res.json({ msg: "Producto eliminado" });
     } catch (error) {
-        console.log(error);
+        return next({ code: 400, message: error.message });
     }
 };
 

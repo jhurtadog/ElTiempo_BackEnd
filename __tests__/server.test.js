@@ -2,7 +2,7 @@ import request from 'supertest';
 import expect from 'expect.js';
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import app from "../app.js"
+import app from "./app.js"
 dotenv.config();
 
 beforeEach(async () => {
