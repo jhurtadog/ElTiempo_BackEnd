@@ -1,12 +1,11 @@
 import Usuario from "../models/Usuario.js";
-import generarId from "../helpers/generarId.js";
 import generarJWT from "../helpers/generarJWT.js";
 import errors from  "../const/errors.js"
 
 const registrar = async (req, res, next) => {
   const { email } = req.body;
   const existeUsuario = await Usuario.findOne({ email });
-  if(!existeUsuario) return next(errors.usuarioRegistrar)
+  if(existeUsuario !== null) return next(errors.usuarioRegistrar);
 
   try {
     const usuario = new Usuario(req.body);

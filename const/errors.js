@@ -34,5 +34,9 @@ export default {
     'objEmpty': {
         code: 400,
         message: 'Parametros no válido'
-    }
+    },
+    'nombreString':{
+        code: 400,
+        message: 'Nombre debe tener al menos 1 letra'
+    },
 }
